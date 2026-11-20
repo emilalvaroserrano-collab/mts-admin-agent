@@ -196,6 +196,8 @@ Invoice and purchase order never call an outside API. A purchase order can requi
 
 `/login` is two columns. Google and Microsoft go through the auth broker (`grok-google`, `grok-microsoft`). Email and password are stored in this app's database. Set `VITE_AUTH_ENABLED=false` only for local work without a broker. Do not deploy with auth disabled.
 
+Zendesk is the sole gateway: every sign-in path, including Google and Microsoft, must resolve to an active user in the MTS/Zendesk directory before a local identity or session is created. A social identity alone cannot open an account here. Without Zendesk credentials configured, the check falls back to the local customer and staff tables so local development still works.
+
 ## Project layout
 
 ```
